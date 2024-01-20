@@ -1,4 +1,6 @@
-<h2 align="center"><a href="#wrench-installation"><img src="https://user-images.githubusercontent.com/61329159/204102654-0e414196-bea2-4147-9e1e-aeb8b4190893.png" width="20" height="20" /></a> Firefox Mod Blur - Modular</h2>
+<h2 align="center"><a href="#wrench-installation"><img src="https://user-images.githubusercontent.com/61329159/204102654-0e414196-bea2-4147-9e1e-aeb8b4190893.png" width="20" height="20" /></a> Firefox Mod Blur - Modular (Installer Fork)</h2>
+
+<p align="center"><i>This fork adds an installer that helps manage mods/themes.</i></p>
 
 <p align="center"><a href="#page_facing_up-other"><img alt="Version" src="https://img.shields.io/badge/Last%20tested%20Firefox-v121.0-blue?style=flat&logo=firefox&logoColor=white"></a> <a href="#shield-last-updates"><img alt="Updated Date" src="https://img.shields.io/badge/Updated-22/12/2023-blueviolet?style=flat"> <img alt="Created" src="https://img.shields.io/badge/Updated%20since-2020-important?style=flat"> <a href="https://www.reddit.com/r/FirefoxCSS/">
 <p align="center"><a href="#wrench-installation"><img alt="Installation Guide" src="https://img.shields.io/badge/Installation%20Guide-informational?style=for-the-badge"></a> <a href="#-select-and-add-extra-styles-and-functions"><img alt="Extra mods" src="https://img.shields.io/badge/Extra%20Mods-blueviolet?style=for-the-badge"></a> 
@@ -148,6 +150,31 @@ There are two settings to change in firefox (pictures below).
 	 :open_file_folder: `...` `/` `your profile` `/` `chrome` `/` `[extra modification file].css`
 	 
 	 :open_file_folder: `...` `/` `your profile` `/` `chrome` `/` `wallpaper` `/` `(for wallpaper theme)`
+
+<h3>Installer Script</h3>
+
+> [!WARNING]
+> Since the structure of `EXTRA MODS` and `EXTRA THEMES` have been modified in this fork,
+> the installer does not work in the upstream repo.
+
+<h4>Prerequisites</h4>
+Install a Python package with the following command:
+
+```sh
+pip install -r requirements.txt
+```
+
+<h4>Usage</h4>
+
+```sh
+./installer.py <Firefox profile directory>
+```
+
+or on Windows
+
+```sh
+python3 installer.py <Firefox profile directory>
+```
 
 </br>
 
