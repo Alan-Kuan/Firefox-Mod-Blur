@@ -151,7 +151,7 @@ There are two settings to change in firefox (pictures below).
 	 
 	 :open_file_folder: `...` `/` `your profile` `/` `chrome` `/` `wallpaper` `/` `(for wallpaper theme)`
 
-<h3>Installer Script</h3>
+<h3>:page_with_curl: Installer Script</h3>
 
 > [!WARNING]
 > Since the structure of `EXTRA MODS` and `EXTRA THEMES` have been modified in this fork,
@@ -175,6 +175,23 @@ or on Windows
 ```sh
 python3 installer.py <Firefox profile directory>
 ```
+
+<h4>Screenshots</h4>
+
+- First time to install:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/e42d8bcb-bf7e-4a95-8a59-b68e22d08838)
+- Run the script after installed:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/328953d1-3ca4-4109-adef-fb8dc5e4250a)
+- Manage Mods:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/e958649c-3c70-4961-b512-0b4bac854eef)
+- Manage Themes:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/46110517-57bc-4a4f-97c7-cf0c6f49f4c8)
+- Update Mods/Theme:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/c6e0e946-4a3b-475c-bb8c-9cd72e4d6372)
+- List Installed Mods/Theme:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/fea31d07-cbaa-4a46-8290-d5c58abbdd44)
+- Uninstall:
+  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/93183b15-bc1b-4ee9-b88c-29c8892abe41)
 
 </br>
 
