@@ -11,7 +11,7 @@
   html:not(#ublock0-epicker),
   html:not(#ublock0-epicker) body,
   #newtab-customize-overlay {
-    background-image: url("image/spill.svg") !important;
+    background-image: url("ASSETS/other/spill.svg") !important;
   }
 
   #search-handoff-button {
@@ -45,7 +45,7 @@ url("about:newtab") {
   html:not(#ublock0-epicker),
   html:not(#ublock0-epicker) body,
   #newtab-customize-overlay {
-    background-image: url("image/spill-main.svg") !important;
+    background-image: url("ASSETS/other/spill-main.svg") !important;
   }
 
   .body-wrapper .tile {
