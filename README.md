@@ -2,6 +2,10 @@
 
 <p align="center"><i>This fork adds an installer that helps manage mods/themes.</i></p>
 
+> [!NOTE]
+> I'll keep maintaining this fork until the upstream author
+> finishes the feature of toggling extra mods/themes in `about:config`.
+
 <p align="center">
 <a href="#page_facing_up-other"><img alt="Version" src="https://img.shields.io/badge/Last%20tested%20Firefox-v121.0.1-blue?style=flat&logo=firefox&logoColor=white"></a>
 <a href="#shield-last-updates"><img alt="Updated Date" src="https://img.shields.io/badge/Updated-22/12/2023-blueviolet?style=flat"></a>
@@ -158,7 +162,7 @@ There are two settings to change in firefox (pictures below).
 <h3>:page_with_curl: Installer Script</h3>
 
 > [!WARNING]
-> Since the structure of `EXTRA MODS` and `EXTRA THEMES` have been modified in this fork,
+> Since names of some files have been modified in this fork,
 > the installer does not work in the upstream repo.
 
 <h4>Prerequisites</h4>
