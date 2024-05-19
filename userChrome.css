@@ -344,6 +344,9 @@ Order of Toolbars
     var(--firefoxcss-top-bar-border-bottom-color) !important;
 }
 
+/* Some random 0.01px(???) line removed (Firefox v126.0)*/
+#nav-bar { border-top: 0px !important; }
+
 /*=====================================================================
 ======================= H E I G H T   F I X E S =======================
 =====================================================================*/
@@ -473,6 +476,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 ============================ S E A R C H   B A R ======================
 =====================================================================*/
 
+/* Some elements border radius */
 #urlbar-input-container,
 #searchbar,
 #urlbar-container,
@@ -480,15 +484,18 @@ about:config -> svg.context-properties.content.enabled -> true*/
   border-radius: var(--firefoxcss-border-radius) !important;
 }
 
+/* Remove line in search bar below text separating search results */
 #urlbar .urlbarView-body-inner {
   border-top: 0px !important;
 }
 
+/* Dont remember what this is for */
 #urlbar:not(.megabar):not([focused="true"]),
 #urlbar:not(.megabar):not([focused="true"]):hover {
   border-bottom: transparent;
 }
 
+/* Aligns text in the middle of search bar */
 #urlbar .urlbar-input-box {
   text-align: center;
 }
@@ -504,11 +511,12 @@ about:config -> svg.context-properties.content.enabled -> true*/
   box-shadow: var(--firefoxcss-url-box-shadow-color) !important;
 }
 
+/* Removes separator line at the bottom of search bar separating search buttons and menus */
 .urlbarView:not([noresults]) > .search-one-offs:not([hidden]) {
   border-top: none !important;
 }
 
-/* Megabar */
+/* Megabar - Popout search bar on focus */
 #urlbar[breakout] {
   height: auto !important;
 }
@@ -528,12 +536,16 @@ about:config -> svg.context-properties.content.enabled -> true*/
   transition: none !important;
 }
 
-#urlbar[breakout][breakout-extend] {
+#urlbar[breakout] {
   top: calc(
     (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
   ) !important;
   left: 0 !important;
   width: 100% !important;
+}
+
+#urlbar[breakout]:not([open]){
+  bottom: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
 /* Styling Extra search bar that you can add to firefox */
@@ -1126,6 +1138,22 @@ toolbar
   transition-delay: 500ms;
 }
 
+#nav-bar:not([customizing="true"]):not(.searchButton)
+  > #nav-bar-customization-target
+  > #urlbar-container
+  > #urlbar
+  > #urlbar-input-container
+  > #identity-box
+  > #identity-icon-box:not([open])
+  > #identity-icon-label {
+  opacity: 0;
+  visibility: collapse;
+}
+
+#identity-icon-label {
+  transition:  opacity 0.3s ease;
+}
+
 #page-action-buttons .urlbar-page-action,
 #identity-permission-box,
 #notification-popup-box .notification-anchor-icon {
@@ -1146,13 +1174,15 @@ toolbar
 }
 
 #urlbar #identity-box.extensionPage #identity-icon-box {
+  /* padding-inline: var(--urlbar-icon-padding) !important; */
   margin-inline-start: initial !important;
   opacity: 1 !important;
 }
 
 #identity-box:hover #identity-icon-box,
 #identity-box:hover #identity-permission-box,
-#identity-box #identity-permission-box[open="true"] {
+#identity-box #identity-permission-box[open="true"],
+#identity-box #identity-icon-box[open="true"]{
   opacity: 1 !important;
   margin-inline-start: initial !important;
 }
