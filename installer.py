@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import filecmp
 import inquirer
 from inquirer.errors import ValidationError
@@ -17,13 +18,17 @@ BLUE = '\033[34m'
 RESET = '\033[39m'
 
 def main():
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0]} <Firefox profile directory>')
-        exit()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', metavar='DIRECTORY', type=str, help="the path to Firefox profile directory; \
+if '-e', '--exact' flag is enabled, this should be the path to the exact 'chrome' directory.")
+    parser.add_argument('-e', '--exact', action='store_true', help="whether the path is exactly the 'chrome' directory. \
+It will be useful if you wrap 'Firefox Mod Blur' in your own 'chrome' directory with a different name.")
+    args = parser.parse_args()
 
     script_dir = path.dirname(path.realpath(__file__))
-    profile_dir = path.realpath(path.expanduser(sys.argv[1]))
-    menu = Menu(script_dir, profile_dir)
+    given_dir = path.realpath(path.expanduser(args.path))
+    chrome_dir = given_dir if args.exact else path.join(given_dir, 'chrome')
+    menu = Menu(script_dir, chrome_dir)
     menu.main()
 
 
@@ -82,10 +87,9 @@ class Config:
             json.dump(self.config, f)
 
 class Menu:
-    def __init__(self, base_dir, profile_dir):
+    def __init__(self, base_dir, chrome_dir):
         self._base_dir = base_dir
-        self._profile_dir = profile_dir
-        self._chrome_dir = path.join(self._profile_dir, 'chrome')
+        self._chrome_dir = chrome_dir
         self._conf_path = path.join(self._chrome_dir, CONF_NAME)
         self._config = Config(self._conf_path)
 
