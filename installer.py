@@ -46,7 +46,7 @@ class Config:
             self.config = json.loads('{}')
             return
 
-        with open(conf_path) as f:
+        with open(conf_path, encoding='utf8') as f:
             f.readline()  # first line is a comment
             self.config = json.load(f)
 
@@ -63,10 +63,10 @@ class Config:
         return self.config.keys()
 
     def write(self):
-        with open(self.conf_path, 'w') as f:
+        with open(self.conf_path, 'w', encoding='utf8') as f:
             f.write('// This file is maintained by Firefox Mod Blur Installer. ')
             f.write('You should not modified it by yourself!\n')
-        with open(self.conf_path, 'a') as f:
+        with open(self.conf_path, 'a', encoding='utf8') as f:
             json.dump(self.config, f)
 
 class Menu:
@@ -137,7 +137,7 @@ class Menu:
     def _handle_selection(self, category_dir, category, choices, single_choice=False):
         readme_path = path.join(category_dir, 'README.md')
         if path.exists(readme_path) and path.basename(category_dir) != 'EXTRA THEMES':
-            with open(readme_path) as f:
+            with open(readme_path, encoding='utf8') as f:
                 color_print(f.read(), YELLOW)
 
         default = None
@@ -166,7 +166,7 @@ class Menu:
             # show README if this mod requires manual operation, e.g., Centered bookmarks bar items
             if self._config[category][mod] == [] and path.exists(readme_path):
                 color_print(f"Notes of '{mod}':", YELLOW)
-                with open(readme_path) as f:
+                with open(readme_path, encoding='utf8') as f:
                     color_print(f.read().rstrip(), YELLOW)
 
             del self._config[category][mod]
@@ -183,7 +183,7 @@ class Menu:
             # show README
             if path.exists(readme_path):
                 color_print(f"Notes of '{mod}':", YELLOW)
-                with open(readme_path) as f:
+                with open(readme_path, encoding='utf8') as f:
                     color_print(f.read().rstrip(), YELLOW)
 
             self._config[category][mod] = files
