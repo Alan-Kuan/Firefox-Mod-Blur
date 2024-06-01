@@ -351,5 +351,6 @@ if __name__ == '__main__':
         exit()
 
     script_dir = path.dirname(path.realpath(__file__))
-    menu = Menu(script_dir, sys.argv[1])
+    profile_dir = path.realpath(path.expanduser(sys.argv[1]))
+    menu = Menu(script_dir, profile_dir)
     menu.main()
