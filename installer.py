@@ -16,6 +16,17 @@ YELLOW = '\033[33m'
 BLUE = '\033[34m'
 RESET = '\033[39m'
 
+def main():
+    if len(sys.argv) != 2:
+        print(f'Usage: {sys.argv[0]} <Firefox profile directory>')
+        exit()
+
+    script_dir = path.dirname(path.realpath(__file__))
+    profile_dir = path.realpath(path.expanduser(sys.argv[1]))
+    menu = Menu(script_dir, profile_dir)
+    menu.main()
+
+
 def color_print(msg, color=''):
     print(f'{color}{msg}{RESET}')
 
@@ -37,6 +48,7 @@ def turn_into_backup(file_path):
     backup_path = f'{file_path}.{ts}.bak'
     os.rename(file_path, backup_path)
     return backup_path
+
 
 class Config:
     def __init__(self, conf_path):
@@ -346,11 +358,4 @@ class Menu:
         color_print("You have to manually rename 'chrome.xxx.bak/' (if exists) to 'chrome/' for recovering your previous configuration.", YELLOW)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0]} <Firefox profile directory>')
-        exit()
-
-    script_dir = path.dirname(path.realpath(__file__))
-    profile_dir = path.realpath(path.expanduser(sys.argv[1]))
-    menu = Menu(script_dir, profile_dir)
-    menu.main()
+    main()
