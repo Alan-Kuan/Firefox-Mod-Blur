@@ -326,6 +326,7 @@ url("about:newtab") {
     fill: var(--firefoxcss-context-menu-three-dots) !important;
     inset-inline-end: 18px !important;
     top: -2px !important;
+    background-color: transparent !important;  
   }
 
   .card-outer .context-menu-button.icon:is(:active, :focus) {
@@ -498,6 +499,11 @@ url("about:newtab") {
     .ds-outer-wrapper-breakpoint-override main {
       width: 266px !important;
     }
+  }
+
+  /* Remove static color from close button wrapper in customization menu */
+  .customize-menu .close-button-wrapper {
+    background-color: transparent !important;
   }
 
   /*.outer-wrapper .search-wrapper .search-handoff-button {
