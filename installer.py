@@ -7,7 +7,6 @@ import json
 import os
 from os import path
 import shutil
-import sys
 import time
 
 CONF_NAME = '.firefox-mod-blur.jsonc'
@@ -277,7 +276,7 @@ class Menu:
 
             if category == 'Quit':
                 return
-             
+
             category_dir = path.join(extra_mod_dir, category)
             mods = sorted([dir[0][len(category_dir) + 1:] for dir in os.walk(category_dir)])
             mods = mods[1:]  # ignore category directory
