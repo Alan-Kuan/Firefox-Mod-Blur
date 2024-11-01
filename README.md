@@ -7,14 +7,14 @@
 > finishes the feature of toggling extra mods/themes in `about:config`.
 
 <p align="center">
-<a href="#page_facing_up-other"><img alt="Version" src="https://img.shields.io/badge/Last%20tested%20Firefox-v130.0-blue?style=flat&logo=firefox&logoColor=white"></a>
-<a href="#shield-last-updates"><img alt="Updated Date" src="https://img.shields.io/badge/Updated-13/09/2024-blueviolet?style=flat"></a>
+<a href="#page_facing_up-other"><img alt="Version" src="https://img.shields.io/badge/Last%20tested%20Firefox-v132.0-blue?style=flat&logo=firefox&logoColor=white"></a>
+<a href="#shield-last-updates"><img alt="Updated Date" src="https://img.shields.io/badge/Updated-01/11/2024-blueviolet?style=flat"></a>
 <img alt="Created" src="https://img.shields.io/badge/Updated%20since-2020-important?style=flat">
 	
 <p align="center">
 <a href="#wrench-installation"><img alt="Installation Guide" src="https://img.shields.io/badge/Installation%20Guide-informational?style=for-the-badge"></a> 
 <a href="#-select-and-add-extra-styles-and-functions"><img alt="Extra mods" src="https://img.shields.io/badge/Extra%20Mods-blueviolet?style=for-the-badge"></a>
-<a href="https://github.com/datguypiko/Firefox-Mod-Blur/releases/latest"><img alt="Download Latest" src="https://img.shields.io/badge/Download%20v2.10-important?style=for-the-badge"></a>
+<a href="https://github.com/datguypiko/Firefox-Mod-Blur/releases/latest"><img alt="Download Latest" src="https://img.shields.io/badge/Download%20v2.11-important?style=for-the-badge"></a>
 </p>
 
 <p align="center"> <img alt="FirefoxCss" src="https://i.imgur.com/ChlWHFp.png"> </p>
@@ -204,8 +204,7 @@ python3 installer.py <Firefox profile directory>
 <h2>:wrench: MicaForEveryone Installation</h2>
 
 > [!Warning]
-> ##### DEPRECATED WITH FIREFOX v117 and up
-> ##### To continue using MicaForEveryone you can use Firefox v115 ESR - Extended Support Release version which will be supported and have security updates for at least a year. You can install ESR version to separate folder so you are able continue using both versions. I haven't tested that version so there could be some minor issues. https://www.mozilla.org/en-US/firefox/all/#product-desktop-esr. I recommend using my older version files. [Maybe something like v115.x - v117.x should work fine.](https://github.com/datguypiko/Firefox-Mod-Blur/releases).
+> ##### Coming soon again in firefox v133,v134 or v135. Will probably come with v3.0.
  
 1. Download the portable or installation file from [github.com/MicaForEveryone](https://github.com/MicaForEveryone/MicaForEveryone/releases).
 2. Install the extra files it asks you to install. And run the program.
