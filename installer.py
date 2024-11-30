@@ -70,37 +70,37 @@ def turn_into_backup(file_path):
 
 class Config:
     def __init__(self, conf_path):
-        self.conf_path = conf_path
+        self._conf_path = conf_path
 
         if not path.exists(conf_path):
-            self.config = json.loads("{}")
+            self._config = json.loads("{}")
             return
 
         with open(conf_path, encoding="utf8") as f:
             f.readline()  # first line is a comment
-            self.config = json.load(f)
+            self._config = json.load(f)
 
     def __getitem__(self, key):
-        return self.config[key]
+        return self._config[key]
 
     def __setitem__(self, key, val):
-        self.config[key] = val
+        self._config[key] = val
 
     def __delitem__(self, key):
-        del self.config[key]
+        del self._config[key]
 
     def __contains__(self, key):
-        return key in self.config
+        return key in self._config
 
     def keys(self):
-        return self.config.keys()
+        return self._config.keys()
 
     def write(self):
-        with open(self.conf_path, "w", encoding="utf8") as f:
+        with open(self._conf_path, "w", encoding="utf8") as f:
             f.write("// This file is maintained by Firefox Mod Blur Installer. ")
             f.write("You should not modified it by yourself!\n")
-        with open(self.conf_path, "a", encoding="utf8") as f:
-            json.dump(self.config, f)
+        with open(self._conf_path, "a", encoding="utf8") as f:
+            json.dump(self._config, f)
 
 
 class Menu:
