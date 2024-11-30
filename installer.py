@@ -107,8 +107,10 @@ class Menu:
     def __init__(self, base_dir, chrome_dir):
         self._base_dir = base_dir
         self._chrome_dir = chrome_dir
-        self._conf_path = path.join(self._chrome_dir, CONF_NAME)
-        self._config = Config(self._conf_path)
+
+        conf_path = path.join(chrome_dir, CONF_NAME)
+        self._config = Config(conf_path)
+        self._has_been_installed = path.exists(conf_path)
 
         self._single_choice_categories = [
             "Auto hide Mods",
@@ -238,7 +240,7 @@ class Menu:
         print("Firefox Mod Blur Installer starts...")
         print()
 
-        if path.exists(self._conf_path):
+        if self._has_been_installed:
             choices = [
                 "Manage Mods",
                 "Manage Themes",
