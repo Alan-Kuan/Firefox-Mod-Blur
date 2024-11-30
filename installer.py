@@ -24,13 +24,13 @@ def main():
         metavar="DIRECTORY",
         type=str,
         help="the path to Firefox profile directory; \
-if '-e', '--exact' flag is enabled, this should be the path to the exact 'chrome' directory.",
+if '-e', '--exact' flag is enabled, this should be the path to the exact directory where the files are installed.",
     )
     parser.add_argument(
         "-e",
         "--exact",
         action="store_true",
-        help="whether the path is exactly the 'chrome' directory. \
+        help="whether the given directory is exactly where the files are installed. \
 It will be useful if you wrap 'Firefox Mod Blur' in your own 'chrome' directory with a different name.",
     )
     args = parser.parse_args()
