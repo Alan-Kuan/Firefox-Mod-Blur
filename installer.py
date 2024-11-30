@@ -328,9 +328,9 @@ class Menu:
                 return
 
             category_dir = path.join(extra_mod_dir, category)
-            mods = sorted([
-                dir[0][len(category_dir) + 1 :] for dir in os.walk(category_dir)
-            ])
+            mods = sorted(
+                [dir[0][len(category_dir) + 1 :] for dir in os.walk(category_dir)]
+            )
             mods = mods[1:]  # ignore category directory
 
             self._handle_selection(
@@ -339,11 +339,13 @@ class Menu:
 
     def themes(self):
         extra_theme_dir = path.join(self._base_dir, "EXTRA THEMES")
-        themes = sorted([
-            dir[0][len(extra_theme_dir) + 1 :]
-            for dir in os.walk(extra_theme_dir)
-            if dir[1] == []
-        ])
+        themes = sorted(
+            [
+                dir[0][len(extra_theme_dir) + 1 :]
+                for dir in os.walk(extra_theme_dir)
+                if dir[1] == []
+            ]
+        )
 
         self._handle_selection(extra_theme_dir, "theme", themes, True)
 
