@@ -359,6 +359,7 @@ class Menu:
         ] + ["ASSETS"]
         updated = self._compare_and_update(self._base_dir, old_files, new_files)
         if updated:
+            self._config["essential"] = new_files
             has_updated = True
             color_print("[^] essential files were successfully updated!", GREEN)
         else:
@@ -385,13 +386,16 @@ class Menu:
                 new_files = [entry for entry in os.listdir(mod_dir) if ".css" in entry]
                 updated = self._compare_and_update(mod_dir, old_files, new_files)
                 if updated:
+                    self._config[category][mod] = new_files
                     has_updated = True
                     color_print(f"[^] {mod} was successfully updated!", GREEN)
                 else:
                     print(f"[=] there is no update for '{mod}'.")
 
         print()
-        if not has_updated:
+        if has_updated:
+            self._config.write()
+        else:
             color_print("Note: you have to pull the repository by yourself!", YELLOW)
         print()
 
