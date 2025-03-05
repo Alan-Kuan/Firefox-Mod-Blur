@@ -21,12 +21,12 @@
 @import url("white_github_icon_in_bookmarks.css");
 @import url("only_show_list-all-tabs_when_tabs_overflowing.css");
 @import url("hide_tab_bar.css");
-@import url("bookmarks_bar_same_color_as_toolbar.css");
 @import url("min-max-close_buttons.css");
 @import url("acrylic_micaforeveryone.css");
 @import url("privacy_blur_tabs_content.css");
 @import url("popout_bookmarks_bar_on_hover.css");
 @import url("remove_folder_icons_from_bookmarks.css");
+@import url("bookmarks_bar_same_color_as_toolbar.css");
 @import url("icons_in_main_menu.css");
 @import url("ublock-icon-change.css");
 @import url("selected_tabs_static_width.css");
@@ -120,7 +120,7 @@
 
     /* Other colors */
     --firefoxcss-urlbar-zoom-button: hsla(0, 0%, 60%, 0.35);
-    --firefoxcss-top-bar-border-bottom-color: hsla(0, 0%, 6%, 0.75);
+    --firefoxcss-top-bar-border-bottom-color: hsla(0, 0%, 6%, 0.2);
     --firefoxcss-private-browsing-menu-color: hsl(277, 70%, 64%);
     --firefoxcss-private-browsing-drop-shadow: drop-shadow(
       0px 0px 1px #000000d5
@@ -132,6 +132,8 @@
     --firefoxcss-customize-view-overflow-menu: hsl(240, 2%, 10%);
 
     /* ============== Firefox Global colors change ==================== */
+             /* Hamburger menu button hover color */
+    --panel-item-hover-bgcolor: hsla(0, 0%, 60%, 0.25) !important;
     --toolbar-bgcolor: var(--firefoxcss-item-bg-color) !important;
     --arrowpanel-background: var(--firefoxcss-main-bg-color) !important;
      --toolbarbutton-hover-background: hsla(0, 0%, 60%, 0.35)!important;  
@@ -161,7 +163,8 @@
     ) !important;
     /* Color for add bookmarks menu when adding through tabs */
     --in-content-page-background: var(--arrowpanel-background) !important;
-    --firefoxcss-context-menu-item-bg-color: hsla(0, 0%, 60%, 0.2) !important;
+    --firefoxcss-context-menu-item-bg-color: hsla(0, 0%, 60%, 0.3);
+    --firefoxcss-context-menu-item-bg-color-inactive: hsla(0, 0%, 60%, 0.15);
   }
 }
 
@@ -240,6 +243,7 @@
     --firefoxcss-customize-view-overflow-menu: hsl(200, 5%, 100%);
 
     /* ============== Firefox Global colors change ==================== */
+    --panel-item-hover-bgcolor: hsla(240, 5%, 70%, 0.35) !important;
     --toolbar-bgcolor: var(--firefoxcss-item-bg-color) !important;
     --toolbarbutton-hover-background: hsla(200, 5%, 70%, 0.35) !important;  
     --toolbarbutton-active-background: hsla(200, 5%, 50%, 0.35) !important;
@@ -259,12 +263,8 @@
     ) !important;
     /* Color for add bookmarks menu when adding through tabs */
     --in-content-page-background: var(--arrowpanel-background) !important;
-    --firefoxcss-context-menu-item-bg-color: hsla(
-      240,
-      5%,
-      70%,
-      0.35
-    ) !important;
+    --firefoxcss-context-menu-item-bg-color: hsla(240, 2%, 70%, 0.35);
+    --firefoxcss-context-menu-item-bg-color-inactive: hsla(240, 2%, 70%, 0.15);
   }
 }
 
@@ -343,8 +343,9 @@ Order of Toolbars
 
 /* Bookmarks bar background color */
 #PersonalToolbar {
-  background-color: var(--firefoxcss-bookmarks-bg-color) !important;
-  backdrop-filter: blur(10px) !important;
+/*   background-color: var(--firefoxcss-bookmarks-bg-color) !important; */
+/*   backdrop-filter: blur(10px) !important; */
+  background-color: var(--firefoxcss-item-bg-color) !important;
 }
 
 /* Set navigation toolbar to transparent */
@@ -408,8 +409,8 @@ Order of Toolbars
 
 /* Remove line between website content and top bar */
 #navigator-toolbox {
-  border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
-    var(--firefoxcss-top-bar-border-bottom-color) !important;
+/*   border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
+    var(--firefoxcss-top-bar-border-bottom-color) !important; */
 }
 
 /*=====================================================================
@@ -456,12 +457,12 @@ about:config -> svg.context-properties.content.enabled -> true*/
   menugroup > #context-forward,
   #search-container #searchbar .search-go-button,
   #urlbar-go-button {
-    list-style-image: url(ASSETS/icons/right-arrow.svg) !important;
+    list-style-image: url(ASSETS/icons/right-arrowContext.svg) !important;
   }
 
   #back-button,
   menugroup > #context-back {
-    list-style-image: url(ASSETS/icons/left-arrow.svg) !important;
+    list-style-image: url(ASSETS/icons/left-arrowContext.svg) !important;
   }
 }
 
@@ -486,12 +487,12 @@ about:config -> svg.context-properties.content.enabled -> true*/
   menugroup > #context-forward,
   #search-container #searchbar .search-go-button,
   #urlbar-go-button {
-    list-style-image: url(ASSETS/icons/right-arrow-light.svg) !important;
+    list-style-image: url(ASSETS/icons/right-arrow-lightContext.svg) !important;
   }
 
   #back-button,
   menugroup > #context-back {
-    list-style-image: url(ASSETS/icons/left-arrow-light.svg) !important;
+    list-style-image: url(ASSETS/icons/left-arrow-lightContext.svg) !important;
   }
 }
 
@@ -714,11 +715,13 @@ about:config -> svg.context-properties.content.enabled -> true*/
   outline-width: 1px !important;
 }
 
+@media not (-moz-bool-pref: "sidebar.verticalTabs") {
 /* Show Tab close button on hover */
-.tabbrowser-tab:not([pinned]) .tab-close-button {
-  display: flex !important;
-  opacity: 0;
-  visibility: collapse !important;
+  .tabbrowser-tab:not([pinned]) .tab-close-button {
+    display: flex !important;
+    opacity: 0;
+    visibility: collapse !important;
+  }
 }
 
 #navigator-toolbox .tabbrowser-tab:not([pinned]):hover .tab-close-button {
@@ -790,97 +793,157 @@ about:config -> svg.context-properties.content.enabled -> true*/
   }
 } */
 
+.tab-audio-button {
+  #tabbrowser-tabs:is([orient="vertical"][expanded], [orient="horizontal"])
+    &:not([pinned]):not([crashed]) {
+    &:is([soundplaying], [muted], [activemedia-blocked]) {
+      /*     fill: var(--firefoxcss-tab-speaker-icon-color) !important; */
+      color: var(--firefoxcss-tab-speaker-icon-color) !important;
+      border-radius: 20px !important;
+      transform: scale(1);
+      filter: drop-shadow(-1px 1px 1px light-dark(#0000002e, #00000052));
+      border: none !important;
+      background-color: transparent !important;
+      transition: transform 150ms ease-in-out, fill 100ms ease-in-out,
+        background-color 100ms ease-in-out !important;
+      --button-border-radius: 20px !important;
+
+      &:hover {
+        background-color: var(--firefoxcss-tab-speaker-color) !important;
+        color: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
+        /*     fill: var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
+        transform: scale(0.8);
+        border: none !important;
+        transition: transform 150ms ease-in-out, fill 100ms ease-in-out,
+          background-color 100ms ease-in-out, filter 100ms ease-in-out !important;
+        /*            animation: mod-bounce 250ms ease; */
+      }
+    }
+  }
+}
+
+/* button > .button-background {
+  &[type~="icon"]:not(.labelled) {
+    fill: var(--firefoxcss-tab-speaker-icon-color) !important;
+    border-radius: 20px !important;
+    transform: scale(1);
+    filter: drop-shadow(-1px 1px 1px light-dark(#0000002e, #00000052));
+    border: none !important;
+    transition: transform 150ms ease-in-out, fill 100ms ease-in-out,
+      background-color 100ms ease-in-out !important;
+  }
+}
+
+button:hover > .button-background {
+  &[type~="ghost"] {
+    background-color: var(--firefoxcss-tab-speaker-color) !important;
+    fill: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
+    transform: scale(0.8);
+    border: none !important;
+    transition: transform 150ms ease-in-out, fill 100ms ease-in-out,
+      background-color 100ms ease-in-out, filter 100ms ease-in-out !important;
+  }
+} */
+
 @media (-moz-bool-pref: "sidebar.verticalTabs") {
+
+/* More compact vertical tabs */
+#tabbrowser-tabs[orient="vertical"] .tab-background {
+  margin-block: 0px !important;
+}
+  
   .tabbrowser-tab .tab-icon-overlay:not([crashed]) {
     &:is([soundplaying], [muted], [activemedia-blocked]) {
+      background-image:none !important;
       background-color: var(--firefoxcss-tab-speaker-color) !important;
       /*     background-color: #ffffff26 !important;  */
       background-color: #0000002e !important;
       backdrop-filter: blur(6px);
+/*         border: 1px solid #ffffff29 !important; */
       /*      fill:  var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
       fill: var(--firefoxcss-tab-speaker-icon-color) !important;
-      border: 1px solid #ffffff29 !important;
+/*       border: 1px solid #ffffff29 !important; */
+   
       transition: transform 100ms ease-in-out, fill 100ms ease-in-out,
         background-color 100ms ease-in-out;
 
       &:hover {
         fill: var(--firefoxcss-tab-speaker-icon-color) !important;
         background-color: transparent !important;
+/*         background-color: #ffffff24 !important; */
         border: 1px solid #ffffff29 !important;
+          background-color: #ffffff14 !important;
         transition: transform 100ms ease-in-out, fill 100ms ease-in-out,
           background-color 100ms ease-in-out !important;
         /*     transform: scale(1.4) translate(-0.35rem, 0.48rem); */
-        transform: scale(1.3) translate(-8%, 14%);
+        transform: scale(1.2) translate(-8%, 14%);
+        transform-origin: center !important;
+      }
+    }
+  }
+  
+  .tabbrowser-tab[pinned] .tab-icon-overlay:not([crashed]) {
+    &:is([soundplaying], [muted], [activemedia-blocked]) {
+      background-image:none !important;
+      background-color: var(--firefoxcss-tab-speaker-color) !important;
+      /*     background-color: #ffffff26 !important;  */
+      background-color: #0000002e !important;
+      backdrop-filter: blur(6px);
+/*         border: 1px solid #ffffff29 !important; */
+      /*      fill:  var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
+      fill: var(--firefoxcss-tab-speaker-icon-color) !important;
+/*       border: 1px solid #ffffff29 !important; */
+      transition: transform 100ms ease-in-out, fill 100ms ease-in-out,
+        background-color 100ms ease-in-out;
+
+      &:hover {
+        fill: var(--firefoxcss-tab-speaker-icon-color) !important;
+        background-color: transparent !important;
+/*         background-color: #ffffff24 !important; */
+        border: 1px solid #ffffff29 !important;
+          background-color: #ffffff14 !important;
+        transition: transform 100ms ease-in-out, fill 100ms ease-in-out,  
+          background-color 100ms ease-in-out !important;
+        /*     transform: scale(1.4) translate(-0.35rem, 0.48rem); */
+        transform: scale(1.2) translate(-8%, 14%);
         transform-origin: center !important;
       }
     }
   }
 }
 
+
 @media not (-moz-bool-pref: "sidebar.verticalTabs") {
-  /* Speaker on tabs color fixes */
-  .tabbrowser-tab:not([pinned]) .tab-icon-overlay:not([crashed]) {
+    .tabbrowser-tab[pinned] .tab-icon-overlay:not([crashed]) {
     &:is([soundplaying], [muted], [activemedia-blocked]) {
-      fill: var(--firefoxcss-tab-speaker-icon-color) !important;
-      background-color: transparent !important;
-      border: none !important;
-      transform: scale(1.4);
-      transition: transform 200ms ease-in-out, fill 100ms ease-in-out,
-        background-color 100ms ease-in-out !important;
-      filter: drop-shadow(-1px 1px 1px light-dark(#0000002e, #00000052));
-      &:hover {
-        background-color: var(--firefoxcss-tab-speaker-color) !important;
-        fill: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
-        /*       border: 1px solid #ffffff29 !important; */
-        border: none !important;
-        transform: scale(1.1);
-        transition: transform 200ms ease-in-out, fill 100ms ease-in-out,
-          background-color 100ms ease-in-out, filter 100ms ease-in-out !important;
-        /*        transform: scale(1.2); */
-        /*     background-color: #ffffff26 !important; */
-        /*     backdrop-filter: blur(4px) !important; */
-
-        /*      background-color: transparent !important; */
-        /*       filter: drop-shadow(0px 0px 1px #0000009e); */
-      }
-    }
-  }
-
-  /* .tab-icon-overlay {
-  &:not([indicator-replaces-favicon]) {
-    &:is([soundplaying], [muted], [activemedia-blocked]) {
-      top: unset !important;
-      inset-inline-end: unset !important;
-      transform: translate(50%,-50%); 
-    }
-  }
-} */
-
-  .tabbrowser-tab[pinned] .tab-icon-overlay:not([crashed]) {
-    &:is([soundplaying], [muted], [activemedia-blocked]) {
+      background-image:none !important;
       background-color: var(--firefoxcss-tab-speaker-color) !important;
       /*     background-color: #ffffff26 !important;  */
       background-color: #0000002e !important;
       backdrop-filter: blur(6px);
+        border: 1px solid #ffffff29 !important;
       /*      fill:  var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
       fill: var(--firefoxcss-tab-speaker-icon-color) !important;
-      border: 1px solid #ffffff29 !important;
+/*       border: 1px solid #ffffff29 !important; */
       transition: transform 100ms ease-in-out, fill 100ms ease-in-out,
         background-color 100ms ease-in-out;
 
       &:hover {
         fill: var(--firefoxcss-tab-speaker-icon-color) !important;
         background-color: transparent !important;
+/*         background-color: #ffffff24 !important; */
         border: 1px solid #ffffff29 !important;
+          background-color: #ffffff14 !important;
         transition: transform 100ms ease-in-out, fill 100ms ease-in-out,
           background-color 100ms ease-in-out !important;
         /*     transform: scale(1.4) translate(-0.35rem, 0.48rem); */
-        transform: scale(1.3) translate(-8%, 14%);
+        transform: scale(1.2) translate(-8%, 14%);
         transform-origin: center !important;
       }
+      
     }
   }
-
+  
   /* Pinned tabs padding  */
   :root:not([uidensity="compact"]) .tab-content[pinned] {
     padding: 0 8px !important;
@@ -931,7 +994,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
   }
 
   #TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-background {
-    margin-block: 2px !important;
+/*     margin-block: 2px !important; */
   }
 
   /* Remove right and left side tab overflow border line */
@@ -1060,62 +1123,28 @@ about:config -> svg.context-properties.content.enabled -> true*/
 ====================== C O N T E X T   M E N U ========================
 =====================================================================*/
 
+/*  affects normal stuff FIX IT */
 menupopup :-moz-any(menu, menuitem) {
-  margin-top: 2px !important;
-  margin-bottom: 1px !important;
   /*   padding-top: 4px !important;
   padding-bottom: 4px !important; */
 }
 
-menupopup {
+/*  Context menu padding */
+:not(#ContentSelectDropdown) > menupopup {
   @media (-moz-platform: windows) {
     & > menu,
     & > menuitem {
-      padding-block: 0.25em !important;
-      margin-left: 2px !important;
-      margin-right: 2px !important;
+      padding-block: 0.3em !important;
+      margin-inline: 4px !important;
+      margin-block: 2px !important;
     }
   }
 }
 
-@media (-moz-platform: windows) {
-  #context-navigation
-    > .menuitem-iconic[_moz-menuactive="true"]
-    > .menu-iconic-left
-    > .menu-iconic-icon {
-    border-radius: var(--toolbarbutton-border-radius) !important;
-    background-color: var(--button-hover-bgcolor) !important;
-  }
-
-  menupopup
-    > :-moz-any(
-      menu[_moz-menuactive="true"],
-      menuitem[_moz-menuactive="true"]:not([selected])
-    ) {
-    background-color: var(--firefoxcss-context-menu-item-bg-color) !important;
-  }
-
-  #context-navigation > .menuitem-iconic[_moz-menuactive] {
-    &:not([disabled]) {
-      background-color: transparent !important;
-    }
-    &[disabled] {
-      background-color: transparent !important;
-    }
-  }
-}
-
+/* Some website and menu dropdown colors  */
 #ContentSelectDropdownPopup {
   --content-select-background-image: none !important;
 }
-
-/* menupopup :-moz-any(menu:first-child, menuitem:first-child) {
-  margin-top: 0px !important;
-}
-
-menupopup :-moz-any(menu:last-child, menuitem:last-child) {
-  margin-bottom: 0px !important;
-} */
 
 /* ----- Menu Separator #context-sep-selectall ----- */
 menuseparator {
@@ -1128,28 +1157,35 @@ menuseparator#context-sep-navigation {
   border-color: var(--arrowpanel-border-color) !important;
 }
 
-/* ----- Menu Colors -- border - rgba(82, 82, 94, 0.31) ----- */
-:not(#ContentSelectDropdown) > menupopup {
-  --panel-border-color: var(--arrowpanel-border-color) !important;
-  --panel-background: var(--firefoxcss-main-bg-color) !important;
-  --panel-padding: 2px 0 2px !important;
-  --panel-border-radius: 8px !important;
+/* ----- Menu Colors ----- */
+menupopup,
+panel {
+  :not(#ContentSelectDropdown) > & {
+    --panel-border-color: var(--arrowpanel-border-color) !important;
+    --panel-padding: 2px 0px !important;
+    --panel-border-radius: 8px !important;
+    --panel-padding-block: 4px !important;
+    --panel-background: var(--firefoxcss-main-bg-color) !important;
+  }
 }
 
+/* Right click */
 #context-navigation:not([hidden]) {
   background-color: var(--firefoxcss-context-menu-top-color) !important;
-  padding: 2px 0px 2px !important;
-  border-top-left-radius: 8px !important;
-  border-top-right-radius: 8px !important;
+  padding: 4px !important;
+  border-top-left-radius: var(--panel-border-radius) !important;
+  border-top-right-radius: var(--panel-border-radius) !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
 
+/* Top of context menu  */
 menupopup#contentAreaContextMenu {
   --panel-padding: unset !important;
-  --panel-padding: 0 0 3px !important;
+  --panel-padding: 0 0 4px !important;
 }
 
+/* Menu when right clicking links  */
 menupopup
   menuitem:is(#context-openlinkintab, #context-undo, #context-viewimage) {
   margin-top: 3px !important;
@@ -1173,12 +1209,20 @@ menupopup
   opacity: 0.5 !important;
 }
 
-#context-navigation > .menuitem-iconic {
-  & > .menu-iconic-left {
-    & > .menu-iconic-icon {
-      width: 42px !important;
-      height: 32px !important;
-    }
+menu,
+menuitem {
+  &:where([disabled="true"]) {
+  }
+
+  &:where([_moz-menuactive]:not([disabled="true"])) {
+    color: -moz-menuhovertext;
+    background-color: var(--firefoxcss-context-menu-item-bg-color) !important;
+  }
+
+  &:where([_moz-menuactive="true"][disabled="true"]) {
+    background-color: var(
+      --firefoxcss-context-menu-item-bg-color-inactive
+    ) !important;
   }
 }
 /*=====================================================================
@@ -1965,33 +2009,37 @@ mask-composite: intersect;
     --firefoxcss-top-bar-border-bottom-size: 0px;
   }
 
-  /* Remove the white line around the content window */
-    #tabbrowser-tabbox {
-      outline: 1px solid light-dark(#0000000a, #00000026) !important;
-      /*! box-shadow: none !important; */
-    }
- 
- 
-    #nav-bar .titlebar-spacer[type="post-tabs"] {
-      width: 20px !important;
-      display: initial !important;
-    }
-  
+  #nav-bar .titlebar-spacer[type="post-tabs"] {
+    width: 20px !important;
+    display: initial !important;
+  }
+
+  #tabbrowser-arrowscrollbox {
+    --toolbox-bgcolor: var(--firefoxcss-item-bg-color) !important;
+  }
   
   @media (-moz-bool-pref: "mod.disable.scrollbar.in.vertical.tabs") {
-    #tabbrowser-arrowscrollbox[orient="vertical"] {
-    &::part(scrollbox) {
-      scrollbar-width: none !important;
+    spacer[part="overflow-start-indicator"] + scrollbox[orient="vertical"][part="scrollbox"] {
+       scrollbar-width: none !important;
     }
   }
 }
+
+@media (-moz-bool-pref: "sidebar.revamp") {
+    #sidebar-main,
+    #sidebar-box {
+      :root[lwtheme] & {
+        background-color: var(--firefoxcss-item-bg-color) !important;
+        background-image: none !important;
+      }
+    }
   
+    /* Remove the white line around the content window */
+  #tabbrowser-tabbox {
+    outline: 1px solid light-dark(#0000000a, #00000026) !important;
+    /*! box-shadow: none !important; */
+  }
 }
-
-
-
-
-
 
 /*===================== TABS TOP =========================*/
 
