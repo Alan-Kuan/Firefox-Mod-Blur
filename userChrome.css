@@ -25,6 +25,7 @@
 @import url("acrylic_micaforeveryone.css");
 @import url("privacy_blur_tabs_content.css");
 @import url("popout_bookmarks_bar_on_hover.css");
+@import url("push_bookmarks_bar_on_hover.css");
 @import url("remove_folder_icons_from_bookmarks.css");
 @import url("bookmarks_bar_same_color_as_toolbar.css");
 @import url("icons_in_main_menu.css");
@@ -346,6 +347,14 @@ Order of Toolbars
 /*   background-color: var(--firefoxcss-bookmarks-bg-color) !important; */
 /*   backdrop-filter: blur(10px) !important; */
   background-color: var(--firefoxcss-item-bg-color) !important;
+}
+
+@media not (-moz-bool-pref: "sidebar.revamp") {
+  /* Remove line between website content and top bar */
+  #navigator-toolbox {
+    border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
+      var(--firefoxcss-top-bar-border-bottom-color) !important;
+  } 
 }
 
 /* Set navigation toolbar to transparent */
@@ -1002,6 +1011,11 @@ button:hover > .button-background {
     border-color: transparent !important;
   }
 }
+
+/* Make tab group works correctly */
+tab-group[collapsed] > .tabbrowser-tab {
+  visibility:collapse !important;
+}
 /*=====================================================================
 ============ W I N D O W   C O N T R O L   B U T T O N S ==============
 =====================================================================*/
@@ -1403,62 +1417,6 @@ toolbar
      default search engine results page" enabled.
      When you search a globe icon shows up to show full url */
 
-  #nav-bar:not([customizing="true"]):not(.searchButton)
-    > #nav-bar-customization-target
-    > #urlbar-container:not(:hover)
-    > #urlbar:not([focused])
-    > .urlbar-input-container
-    > #page-action-buttons
-    .urlbar-page-action:not([open]) {
-    /*   opacity: 0;
-    transition-delay: 500ms; */
-  }
-
-  /* #nav-bar:not([customizing="true"]):not(.searchButton)
-    > #nav-bar-customization-target
-    > #urlbar-container:not(:hover)
-    > #urlbar:not([focused])
-    > .urlbar-input-container
-    > #identity-box
-    #notification-popup-box:not([open])
-    .notification-anchor-icon {
-    opacity: 0;
-    transition-delay: 500ms;
-  } */
-
-  #nav-bar:not([customizing="true"]):not(.searchButton)
-    > #nav-bar-customization-target
-    > #urlbar-container:not(:hover)
-    > #urlbar:not([focused])
-    > .urlbar-input-container
-    > #identity-box
-    > #identity-permission-box:not([open]) {
-    /*   opacity: 0;
-    transition-delay: 500ms; */
-  }
-
-  #nav-bar:not([customizing="true"]):not(.searchButton)
-    > #nav-bar-customization-target
-    > #urlbar-container
-    > #urlbar
-    > .urlbar-input-container
-    > #identity-box
-    > #identity-icon-box:not([open])
-    > #identity-icon-label {
-    /*   opacity: 0;
-    visibility: collapse; */
-  }
-
-  #identity-icon-label {
-    /*   transition: opacity 0.3s ease; */
-  }
-
-  #page-action-buttons .urlbar-page-action,
-  #identity-permission-box,
-  #notification-popup-box .notification-anchor-icon {
-    /*   transition: opacity 0.2s ease; */
-  }
-
   /*
   #urlbar:not([persistsearchterms]) #identity-icon-box,
   #urlbar:not([persistsearchterms]) #identity-permission-box {
@@ -1514,6 +1472,21 @@ toolbar
     transition-delay: 100ms;
   }
 }
+
+  #identity-box.extensionPage #identity-icon-box:not([open]) #identity-icon-label{
+    opacity: 0;
+    visibility: collapse;
+  }
+  
+  #identity-box.extensionPage #identity-icon-box #identity-icon-label {
+    transition: opacity 0.3s ease;
+  }
+
+  @media (-moz-bool-pref: "mod.hide.extension.url.icon") {  
+    #identity-box.extensionPage #identity-icon-box {
+      display: none !important;
+    }
+  }
 
   #tracking-protection-icon-container,
   #identity-icon-box,
@@ -2116,4 +2089,14 @@ mask-composite: intersect;
   }
 }
 
+@media (-moz-bool-pref: "mod.centered.tabs") {
+  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
+    #tabbrowser-arrowscrollbox:not([overflowing]) {
+      --uc-justify-content: center;
+    }
 
+    scrollbox[orient="horizontal"] > slot {
+      justify-content: var(--uc-justify-content, initial);
+    }
+  }
+}
