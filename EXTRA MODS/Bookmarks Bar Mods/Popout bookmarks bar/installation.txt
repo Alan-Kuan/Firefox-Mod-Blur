@@ -1,3 +1,0 @@
-Move file to chrome folder where userChrome and userContent sits.
-
-USE ONLY ONE OF THESE FILES. Push or popout 
