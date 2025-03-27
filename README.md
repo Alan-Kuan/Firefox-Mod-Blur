@@ -25,8 +25,9 @@
 <h3>:page_with_curl: Installer Script</h3>
 
 > [!WARNING]
-> Since names of some files have been modified in this fork,
+> Since the original file organization is modified in this fork,
 > the installer does not work in the upstream repo.
+> For example, the mod that pops out/push bookmarks bar on hover is placed at `EXTRA_MODS/Auto hide Mods`.
 
 <h4>Prerequisites</h4>
 Install a Python package with the following command:
