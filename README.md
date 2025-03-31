@@ -14,6 +14,14 @@
 
 <p align="center"><h6 align="center" href="https://github.com/datguypiko/Firefox-Mod-Blur/issues/129">Preview v 3.0 https://github.com/datguypiko/Firefox-Mod-Blur/issues/129</h6></p>
 
+<h2>:left_right_arrow: Organization Difference</h2>
+- The mods that pop out and push bookmark bar on hover is relocated to `EXTRA_MODS/Auto hide Mods`.
+- `installation.txt` and `readme.txt` are either removed or renamed as `README.md`.
+
+> [!WARNING]
+> Since the original file organization is modified in this fork,
+> the installer does not work in the upstream repo.
+
 <h2>:wrench: Installation</h2>
 
 > [!IMPORTANT]
@@ -23,12 +31,6 @@
 > ##### 4. Follow the instructions below.
 
 <h3>:page_with_curl: Installer Script</h3>
-
-> [!WARNING]
-> Since the original file organization is modified in this fork,
-> the installer does not work in the upstream repo.
-> For example, the mod that pops out/push bookmarks bar on hover is placed at `EXTRA_MODS/Auto hide Mods`.
-
 <h4>Prerequisites</h4>
 Install a Python package with the following command:
 
