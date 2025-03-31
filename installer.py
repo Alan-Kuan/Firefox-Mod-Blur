@@ -351,9 +351,11 @@ class Menu:
         self._handle_selection(extra_theme_dir, "theme", themes, True)
 
     def update(self):
-        has_updated = False
+        something_is_changed = False
 
-        # update essential files
+        #
+        # Update essential files
+        #
         old_files = self._config["essential"]
         new_files = [
             entry for entry in os.listdir(self._base_dir) if ".css" in entry
@@ -361,15 +363,16 @@ class Menu:
         updated = self._compare_and_update(self._base_dir, old_files, new_files)
         if updated:
             self._config["essential"] = new_files
-            has_updated = True
+            something_is_changed = True
             color_print("[^] essential files were successfully updated!", GREEN)
         else:
             print("[=] there is no update for essential files.")
 
-        # update mods/themes
-        categories = list(
-            self._config.keys()
-        )  # prevent modifying the dictionary during iteration
+        #
+        # Update mods/themes
+        #
+        # NOTE: turn it into a list to prevent modifying the dictionary during iteration
+        categories = list(self._config.keys())
         for category in categories:
             if category == "essential":
                 continue
@@ -382,19 +385,60 @@ class Menu:
             mods = list(self._config[category].keys())
             old_files_of_each_mod = list(self._config[category].values())
 
+            # iterate installed mods in this category
             for mod, old_files in zip(mods, old_files_of_each_mod):
                 mod_dir = path.join(category_dir, mod)
-                new_files = [entry for entry in os.listdir(mod_dir) if ".css" in entry]
-                updated = self._compare_and_update(mod_dir, old_files, new_files)
-                if updated:
-                    self._config[category][mod] = new_files
-                    has_updated = True
-                    color_print(f"[^] {mod} was successfully updated!", GREEN)
+                new_category = None
+                # 0: no change, 1: updated, 2: removed
+                status = 0
+
+                # relocated mods
+                if mod_dir.endswith("Bookmarks Bar Mods/Popout bookmarks bar"):
+                    new_category = "Auto hide Mods"
+
+                if new_category:
+                    mod_dir = path.join(
+                        self._base_dir,
+                        f"EXTRA MODS/{new_category}/{mod}",
+                    )
+
+                # check if `mod_dir` still exists
+                if path.isdir(mod_dir):
+                    new_files = [
+                        entry for entry in os.listdir(mod_dir) if ".css" in entry
+                    ]
+                    if self._compare_and_update(mod_dir, old_files, new_files):
+                        self._config[category][mod] = new_files
+                        status = 1
+
+                    # as long as the mod is relocated, it is seen as updated
+                    if new_category:
+                        del self._config[category][mod]
+                        self._config[new_category] = {mod: new_files}
+                        status = 1
+                else:
+                    for file in old_files:
+                        remove_file_or_dir(path.join(self._chrome_dir, file))
+                    del self._config[category][mod]
+                    status = 2
+
+                if status == 1:
+                    something_is_changed = True
+                    color_print(f"[^] '{mod}' was successfully updated!", GREEN)
+                elif status == 2:
+                    something_is_changed = True
+                    color_print(
+                        f"[-] '{mod}' was removed as it's been removed in this version",
+                        RED,
+                    )
                 else:
                     print(f"[=] there is no update for '{mod}'.")
 
+            if len(self._config[category]) == 0:
+                del self._config[category]
+
         print()
-        if has_updated:
+        if something_is_changed:
             self._config.write()
         else:
             color_print("Note: you have to pull the repository by yourself!", YELLOW)
