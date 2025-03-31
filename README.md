@@ -15,6 +15,7 @@
 <p align="center"><h6 align="center" href="https://github.com/datguypiko/Firefox-Mod-Blur/issues/129">Preview v 3.0 https://github.com/datguypiko/Firefox-Mod-Blur/issues/129</h6></p>
 
 <h2>:left_right_arrow: Organization Difference</h2>
+
 - The mods that pop out and push bookmark bar on hover is relocated to `EXTRA_MODS/Auto hide Mods`.
 - `installation.txt` and `readme.txt` are either removed or renamed as `README.md`.
 
