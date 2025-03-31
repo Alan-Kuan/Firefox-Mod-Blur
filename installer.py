@@ -77,7 +77,8 @@ class Config:
             return
 
         with open(conf_path, encoding="utf8") as f:
-            f.readline()  # first line is a comment
+            # drop the first line as it is a comment
+            f.readline()
             self._config = json.load(f)
 
     def __getitem__(self, key):
