@@ -285,7 +285,7 @@
   --urlbar-icon-border-radius: calc(
     var(--firefoxcss-border-radius) - 2px
   ) !important;
-  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
+  @media not -moz-pref("sidebar.verticalTabs") {
     --tab-block-margin: 2px !important;
     /* Default: 4px */
 
@@ -348,7 +348,7 @@ Order of Toolbars
   background-color: var(--firefoxcss-item-bg-color) !important;
 }
 
-@media not (-moz-bool-pref: "sidebar.revamp") {
+@media not -moz-pref("sidebar.revamp") {
   /* Remove line between website content and top bar */
   #navigator-toolbox {
     border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
@@ -545,7 +545,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 }
 
 /* Search outline disabled by default  */
-@media not (-moz-bool-pref: "mod.searchBox.focus.outline.enable") {
+@media not -moz-pref("mod.searchBox.focus.outline.enable") {
   /* Disable Focus outline */
   #urlbar[focused]:not([suppress-focus-border]) > #urlbar-background,
   #searchbar:focus-within {
@@ -671,7 +671,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
   box-shadow: var(--firefoxcss-normal-tabs-box-shadow) !important;
 }
 
-@media (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("sidebar.verticalTabs") {
   .tabbrowser-tab:not([pinned]) .tab-background:not([selected]) {
     background-color: transparent !important;
     box-shadow: none !important;
@@ -723,7 +723,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
   outline-width: 1px !important;
 }
 
-@media not (-moz-bool-pref: "sidebar.verticalTabs") {
+@media not -moz-pref("sidebar.verticalTabs") {
   /* Show Tab close button on hover */
   .tabbrowser-tab:not([pinned]) .tab-close-button {
     display: flex !important;
@@ -807,6 +807,9 @@ about:config -> svg.context-properties.content.enabled -> true*/
     &:is([soundplaying], [muted], [activemedia-blocked]) {
       /*     fill: var(--firefoxcss-tab-speaker-icon-color) !important; */
       color: var(--firefoxcss-tab-speaker-icon-color) !important;
+      --button-text-color-ghost: var(
+        --firefoxcss-tab-speaker-icon-color
+      ) !important;
       border-radius: 20px !important;
       transform: scale(1);
       filter: drop-shadow(-1px 1px 1px light-dark(#0000002e, #00000052));
@@ -819,12 +822,21 @@ about:config -> svg.context-properties.content.enabled -> true*/
       &:hover {
         background-color: var(--firefoxcss-tab-speaker-color) !important;
         color: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
+        --button-text-color-ghost-hover: var(
+          --firefoxcss-tab-speaker-icon-hover-color
+        ) !important;
         /*     fill: var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
         transform: scale(0.8);
         border: none !important;
         transition: transform 150ms ease-in-out, fill 100ms ease-in-out,
           background-color 100ms ease-in-out, filter 100ms ease-in-out !important;
         /*            animation: mod-bounce 250ms ease; */
+      }
+      &:hover:active {
+        color: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
+        --button-text-color-ghost-active: var(
+          --firefoxcss-tab-speaker-icon-hover-color
+        ) !important;
       }
     }
   }
@@ -853,7 +865,7 @@ button:hover > .button-background {
   }
 } */
 
-@media (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("sidebar.verticalTabs") {
   /* More compact vertical tabs */
   #tabbrowser-tabs[orient="vertical"] .tab-background {
     margin-block: 0px !important;
@@ -919,7 +931,7 @@ button:hover > .button-background {
   }
 }
 
-@media not (-moz-bool-pref: "sidebar.verticalTabs") {
+@media not -moz-pref("sidebar.verticalTabs") {
   .tabbrowser-tab[pinned] .tab-icon-overlay:not([crashed]) {
     &:is([soundplaying], [muted], [activemedia-blocked]) {
       background-image: none !important;
@@ -1025,7 +1037,7 @@ tab-group[collapsed] > .tabbrowser-tab {
     }
   }
 
-  @media (-moz-bool-pref: "sidebar.verticalTabs") {
+  @media -moz-pref("sidebar.verticalTabs") {
     #toolbar-menubar[autohide]:not([inactive])
       ~ :is(#TabsToolbar, #nav-bar)
       > .titlebar-buttonbox-container {
@@ -1057,7 +1069,7 @@ tab-group[collapsed] > .tabbrowser-tab {
     margin-right: 0px !important;
   }
 
-  @media not (-moz-bool-pref: "firefoxcss.tabs.on.top.enable") {
+  @media not -moz-pref("firefoxcss.tabs.on.top.enable") {
     #toolbar-menubar .titlebar-button {
       padding-block: 0px !important;
     }
@@ -1075,7 +1087,7 @@ tab-group[collapsed] > .tabbrowser-tab {
       padding-right: initial !important;
     }
 
-    @media not (-moz-bool-pref: "sidebar.verticalTabs") {
+    @media not -moz-pref("sidebar.verticalTabs") {
       #nav-bar {
         padding-right: var(--firefoxcss-control-buttons-margin) !important;
       }
@@ -1308,7 +1320,7 @@ toolbar
 }
 
 /* ----- New tab icon size (16-default). Not change the rest of calc --- */
-@media not (-moz-bool-pref: "sidebar.verticalTabs") {
+@media not -moz-pref("sidebar.verticalTabs") {
   #tabs-newtab-button .toolbarbutton-icon,
   #new-tab-button .toolbarbutton-icon {
     width: calc(2 * var(--toolbarbutton-inner-padding) + 12px) !important;
@@ -1419,7 +1431,7 @@ toolbar
 ============== U R L   A U T O   H I D E   B U T T O N S ==============
 =====================================================================*/
 
-@media not (-moz-bool-pref: "mod.search.info.buttons.show.always") {
+@media not -moz-pref("mod.search.info.buttons.show.always") {
   /* - [persistsearchterms] - 
      Used when "Show search terms instead of URL on 
      default search engine results page" enabled.
@@ -1468,7 +1480,7 @@ toolbar
   }
 
   /* Let you hide location permission icons to fix padding     */
-  @media (-moz-bool-pref: "mod.hide.location.permissions.icon") {
+  @media -moz-pref("mod.hide.location.permissions.icon") {
     #identity-permission-box box image.sharing-icon {
       opacity: 0 !important;
       visibility: collapse !important;
@@ -1495,7 +1507,7 @@ toolbar
     transition: opacity 0.3s ease;
   }
 
-  @media (-moz-bool-pref: "mod.hide.extension.url.icon") {
+  @media -moz-pref("mod.hide.extension.url.icon") {
     #identity-box.extensionPage #identity-icon-box {
       display: none !important;
     }
@@ -1531,7 +1543,7 @@ toolbar
   }
 
   /*   When location permission granted show permission box */
-  @media not (-moz-bool-pref: "mod.hide.location.permissions.icon") {
+  @media not -moz-pref("mod.hide.location.permissions.icon") {
     #urlbar #identity-permission-box:has(image.sharing-icon[sharing]) {
       opacity: 1 !important;
       margin-inline-start: initial !important;
@@ -1760,7 +1772,7 @@ toolbar
     font-size: 0.85em;
   }
 
-  @media (-moz-bool-pref: "sidebar.verticalTabs") {
+  @media -moz-pref("sidebar.verticalTabs") {
     #nav-bar {
       padding-bottom: 1px !important;
       border-top: none !important;
@@ -1817,7 +1829,7 @@ toolbar
 /*=====================================================================
 ============================= O T H E R ===============================
 =====================================================================*/
-@media (-moz-bool-pref: "firefoxcss.disable.tab.preview.panel.fully") {
+@media -moz-pref("firefoxcss.disable.tab.preview.panel.fully") {
   #tab-preview-panel,
   #tabbrowser-tab-tooltip {
     display: none !important;
@@ -1869,7 +1881,7 @@ toolbar
   }
 }
 
-@media not (-moz-bool-pref: "svg.context-properties.content.enabled") {
+@media not -moz-pref("svg.context-properties.content.enabled") {
   #navigator-toolbox::before {
     width: 100%;
     content: ">>>> To fix buttons enable 'svg.context-properties.content.enabled' in about:config (type about:config in search) <<<<";
@@ -1901,7 +1913,7 @@ toolbar
 
 /*===================== VERTICAL =========================*/
 
-@media (-moz-bool-pref: "sidebar.verticalTabs") and (-moz-bool-pref: "sidebar.revamp") {
+@media -moz-pref("sidebar.verticalTabs") and -moz-pref("sidebar.revamp") {
   :root {
     --firefoxcss-top-bar-border-bottom-size: 0px;
   }
@@ -1915,7 +1927,7 @@ toolbar
     --toolbox-bgcolor: var(--firefoxcss-item-bg-color) !important;
   }
 
-  @media (-moz-bool-pref: "mod.disable.scrollbar.in.vertical.tabs") {
+  @media -moz-pref("mod.disable.scrollbar.in.vertical.tabs") {
     spacer[part="overflow-start-indicator"]
       + scrollbox[orient="vertical"][part="scrollbox"] {
       scrollbar-width: none !important;
@@ -1923,26 +1935,25 @@ toolbar
   }
 }
 
-@media (-moz-bool-pref: "sidebar.revamp") {
+@media -moz-pref("sidebar.revamp") {
+  #sidebar-main,
+  #sidebar-box {
+    background-color: var(--firefoxcss-item-bg-color) !important;
+    background-image: none !important;
+  }
+
+  @media -moz-pref("mod.custom.firefox.theme.color.fix") {
     #sidebar-main,
     #sidebar-box {
-        background-color: var(--firefoxcss-item-bg-color) !important;
-        background-image: none !important;
+      background-color: var(--lwt-accent-color) !important;
     }
-  
-  
-    @media (-moz-bool-pref:"mod.custom.firefox.theme.color.fix") {
-      #sidebar-main,
-      #sidebar-box {
-           background-color: var(--lwt-accent-color) !important;
-      }
-      
-      #tabbrowser-arrowscrollbox {
-        --toolbox-bgcolor: var(--lwt-accent-color) !important;
-      }
+
+    #tabbrowser-arrowscrollbox {
+      --toolbox-bgcolor: var(--lwt-accent-color) !important;
     }
-  
-    /* Remove the white line around the content window */
+  }
+
+  /* Remove the white line around the content window */
   #tabbrowser-tabbox {
     outline: 1px solid light-dark(#0000000a, #00000026) !important;
     /*! box-shadow: none !important; */
@@ -1952,8 +1963,8 @@ toolbar
 /*===================== TABS TOP =========================*/
 
 /* Tabs On Top */
-@media (-moz-bool-pref: "firefoxcss.tabs.on.top.enable") {
-  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("firefoxcss.tabs.on.top.enable") {
+  @media not -moz-pref("sidebar.verticalTabs") {
     /* SEARCH BAR TOOLBAR */
     #nav-bar {
       order: 2 !important;
@@ -1999,8 +2010,8 @@ toolbar
   }
 }
 
-@media (-moz-bool-pref: "mod.centered.tabs") {
-  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("mod.centered.tabs") {
+  @media not -moz-pref("sidebar.verticalTabs") {
     #tabbrowser-arrowscrollbox:not([overflowing]) {
       --uc-justify-content: center;
     }
@@ -2014,7 +2025,7 @@ toolbar
 /* Linux window control stuff */
 
 @media (-moz-platform: linux) {
-  @media (-moz-bool-pref: "sidebar.verticalTabs") {
+  @media -moz-pref("sidebar.verticalTabs") {
     #nav-bar .titlebar-spacer[type="post-tabs"] {
       display: none !important;
     }
@@ -2044,14 +2055,14 @@ toolbar
   }
 
   /* Enable Window control buttons */
-  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
-    @media not (-moz-bool-pref: "firefoxcss.tabs.on.top.enable") {
+  @media not -moz-pref("sidebar.verticalTabs") {
+    @media not -moz-pref("firefoxcss.tabs.on.top.enable") {
       #nav-bar > .titlebar-buttonbox-container {
         display: flex !important;
       }
     }
 
-    @media (-moz-bool-pref: "firefoxcss.tabs.on.top.enable") {
+    @media -moz-pref("firefoxcss.tabs.on.top.enable") {
       #TabsToolbar > .titlebar-buttonbox-container {
         display: flex !important;
       }
@@ -2059,17 +2070,17 @@ toolbar
   }
 
   /* Enable Window Control buttons in Vertical Tabs state */
-  @media (-moz-bool-pref: "sidebar.verticalTabs") {
+  @media -moz-pref("sidebar.verticalTabs") {
     #nav-bar:not([tabs-hidden]) > .titlebar-buttonbox-container {
       display: flex !important;
     }
   }
 
   /* Window control buttons on left side  */
-  @media (-moz-bool-pref: "mod.force.window.control.buttons.left.side"),
+  @media -moz-pref("mod.force.window.control.buttons.left.side"),
     (-moz-gtk-csd-reversed-placement),
-    (-moz-bool-pref: "mod.macos") {
-    @media not (-moz-bool-pref: "mod.force.window.control.buttons.right.side") {
+    -moz-pref("mod.macos") {
+    @media not -moz-pref("mod.force.window.control.buttons.right.side") {
       #navigator-toolbox .titlebar-buttonbox-container {
         order: -1 !important;
       }
@@ -2095,10 +2106,10 @@ toolbar
   }
 
   /* Window control buttons right side  */
-  @media not ((-moz-bool-pref: "mod.force.window.control.buttons.left.side")
+  @media not (-moz-pref("mod.force.window.control.buttons.left.side")
        or (-moz-gtk-csd-reversed-placement) 
-       or (-moz-bool-pref:"mod.macos")),
-    (-moz-bool-pref: "mod.force.window.control.buttons.right.side") {
+       or -moz-pref("mod.macos")),
+       -moz-pref("mod.force.window.control.buttons.right.side") {
     /* Reverse button direction*/
     #navigator-toolbox .titlebar-buttonbox-container {
       & .titlebar-min {
@@ -2127,8 +2138,8 @@ toolbar
 
   /* When screen is small and cant fit window 
      control buttons in nav-bar move them down to tab-bar */
-  @media not (-moz-bool-pref: "sidebar.verticalTabs") {
-    @media not (-moz-bool-pref: "firefoxcss.tabs.on.top.enable") {
+  @media not -moz-pref("sidebar.verticalTabs") {
+    @media not -moz-pref("firefoxcss.tabs.on.top.enable") {
       @media (max-width: 600px) {
         #navigator-toolbox #nav-bar > .titlebar-buttonbox-container {
           display: none !important;
