@@ -21,6 +21,7 @@
 @import url("white_github_icon_in_bookmarks.css");
 @import url("only_show_list-all-tabs_when_tabs_overflowing.css");
 @import url("hide_tab_bar.css");
+@import url("thicker_control_buttons.css");
 @import url("min-max-close_buttons.css");
 @import url("acrylic_micaforeveryone.css");
 @import url("privacy_blur_tabs_content.css");
@@ -45,7 +46,6 @@
 @import url("searchbox_text_align_left.css");
 @import url("tabs_take_full_bar_width.css");
 @import url("show_searchbar_dots_only_on_hover.css");
-@import url("thicker_control_buttons.css");
 
 /*=====================================================================
 ================= D A R K   T H E M E   C O L O R S ===================
@@ -356,6 +356,14 @@ Order of Toolbars
   }
 }
 
+@media -moz-pref("sidebar.revamp") {
+  @media not -moz-pref("sidebar.verticaltabs") {
+    #navigator-toolbox {
+      border-bottom: none !important;
+    }
+  }
+}
+
 /* Set navigation toolbar to transparent */
 #navigator-toolbox #nav-bar {
   background-color: transparent !important;
@@ -639,6 +647,11 @@ about:config -> svg.context-properties.content.enabled -> true*/
   .tab-label-container
   .tab-label {
   color: var(--firefoxcss-non-active-tabs) !important;
+}
+
+/* Remove empty space after pinned tabs */
+#pinned-tabs-container[orient="horizontal"] {
+  margin-inline-end: 0px !important;
 }
 
 .tabbrowser-tab .tab-label-container .tab-label {
@@ -964,13 +977,6 @@ button:hover > .button-background {
   /* Pinned tabs padding  */
   :root:not([uidensity="compact"]) .tab-content[pinned] {
     padding: 0 8px !important;
-  }
-
-  #TabsToolbar
-    #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
-    > #tabbrowser-arrowscrollbox
-    > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
-    margin-inline-start: 0px !important;
   }
 
   #tabbrowser-tabs {
@@ -1866,13 +1872,6 @@ toolbar
   display: none !important;
 }
 
-/* Some color fixes after 125.0.1 update. URLBAR Clipboard buttons  */
-.urlbarView-row:is([type="switchtab"], [type="remotetab"], [type="clipboard"]) {
-  & > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
-    background-color: var(--firefoxcss-url-clipboard-button) !important;
-    padding: 4px 8px !important;
-  }
-}
 .urlbarView-button {
   .urlbarView-row:is([row-selectable]:hover, [selected])
     > &:not(:hover, [open]) {
@@ -1955,7 +1954,9 @@ toolbar
 
   /* Remove the white line around the content window */
   #tabbrowser-tabbox {
-    outline: 1px solid light-dark(#0000000a, #00000026) !important;
+/*     outline: 1px solid light-dark(#0000000a, #00000026) !important; */
+    outline: none !important;
+    box-shadow: -0px 0px 2px 0 light-dark(rgba(0,0,0,.2), rgba(255,255,255,.06)) !important;
     /*! box-shadow: none !important; */
   }
 }
@@ -2149,6 +2150,67 @@ toolbar
           display: flex !important;
         }
       }
+    }
+  }
+}
+
+@media -moz-pref("sidebar.verticalTabs") {
+  @media -moz-pref("mod.vertical-tabs.frame.no.borders") {
+      #browser #tabbrowser-tabbox {
+          outline: none !important;
+          box-shadow: none !important;
+      }
+  }
+}
+
+
+@media -moz-pref("browser.tabs.fadeOutUnloadedTabs") {
+  .tabbrowser-tab[pending] .tab-icon-stack,
+  .tabbrowser-tab[pending] .tab-text.tab-label {
+    opacity: 0.65 !important;
+  }
+}
+
+
+/*=====================================================================
+----------------- S E A R C H   M O D E   S W I T C H E R -------------
+=====================================================================*/
+@media -moz-pref("browser.urlbar.searchModeSwitcher.featureGate") or 
+  -moz-pref("browser.urlbar.scotchBonnet.enableOverride") {
+  /* Disable searchmode switcher arrow */
+  #urlbar[searchmode] #urlbar-searchmode-switcher,
+  #urlbar[searchmode] #searchmode-switcher-chicklet {
+    background-color: var(--firefoxcss-item-bg-color) !important;
+  }
+
+  #urlbar:not([searchmode]) #urlbar-searchmode-switcher {
+    background-color: transparent !important;
+  }
+
+  #urlbar:not([searchmode]) #urlbar-searchmode-switcher {
+    &:hover,
+    &:hover:active,
+    &[open] {
+      background-color: var(--firefoxcss-item-bg-color) !important;
+    }
+  }
+
+  #searchmode-switcher-dropmarker {
+    fill: color-mix(in srgb, currentColor 60%, transparent) !important;
+  }
+
+  #searchmode-switcher-dropmarker {
+    #urlbar-searchmode-switcher[open] & {
+      transform: rotate(180deg);
+      transition: transform 150ms ease;
+    }
+
+    #urlbar-searchmode-switcher & {
+      transition: transform 150ms ease;
+    }
+
+    #urlbar-searchmode-switcher:hover & {
+      fill: color-mix(in srgb, currentColor 90%, transparent) !important;
     }
   }
 }
