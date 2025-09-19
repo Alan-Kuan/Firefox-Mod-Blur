@@ -522,9 +522,9 @@ about:config -> svg.context-properties.content.enabled -> true*/
 }
 
 /* Styling Search Containers 
-    #urlbar-background - main search container
+    .urlbar-background - main search container
     #searchbar - secondary/extra search container */
-#urlbar-background,
+.urlbar-background,
 #searchbar {
   border: 0 !important;
   border-radius: var(--firefoxcss-border-radius) !important;
@@ -541,7 +541,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 }
 
 /* Search box border radius  */
-#urlbar-background,
+.urlbar-background,
 #urlbar .urlbar-input-container,
 #searchbar {
   border-radius: var(--firefoxcss-border-radius) !important;
@@ -555,7 +555,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 /* Search outline disabled by default  */
 @media not -moz-pref("mod.searchBox.focus.outline.enable") {
   /* Disable Focus outline */
-  #urlbar[focused]:not([suppress-focus-border]) > #urlbar-background,
+  #urlbar[focused]:not([suppress-focus-border]) > .urlbar-background,
   #searchbar:focus-within {
     outline: none !important;
   }
@@ -581,7 +581,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 }
 
 /* Dropdown search box colors */
-#urlbar[breakout][breakout-extend][open] #urlbar-background {
+#urlbar[breakout][breakout-extend][open] .urlbar-background {
   border-bottom: var(--firefoxcss-url-breakout-border-bottom-color) !important;
   border-top: var(--firefoxcss-url-breakout-border-top-color) !important;
   box-shadow: var(--firefoxcss-url-breakout-box-shadow) !important;
@@ -594,7 +594,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 
 /* Disable weird animation */
 #urlbar[breakout][breakout-extend][breakout-extend-animate]
-  > #urlbar-background {
+  > .urlbar-background {
   animation: none !important;
 }
 
@@ -1181,11 +1181,13 @@ menuseparator#context-sep-navigation {
 /* ----- Menu Colors ----- */
 menupopup,
 panel {
-  :not(#ContentSelectDropdown) > & {
-    --panel-border-color: var(--arrowpanel-border-color) !important;
-    --panel-padding: 2px 0px !important;
+/*   #ContentSelectDropdown used to remove websites native dropdown modifications */
+/*   #ctrlTab-panel used to fix Ctr+Tab */
+  :not(#ContentSelectDropdown) > &:not(#ctrlTab-panel, #autoscroller) {
+/*     --panel-border-color: var(--arrowpanel-border-color) !important; */
+    --panel-padding: 1px 0px !important;
     --panel-border-radius: 8px !important;
-    --panel-padding-block: 4px !important;
+/*     --panel-padding-block: 4px !important; */
     --panel-background: var(--firefoxcss-main-bg-color) !important;
   }
 }
@@ -1203,7 +1205,7 @@ panel {
 /* Top of context menu  */
 menupopup#contentAreaContextMenu {
   --panel-padding: unset !important;
-  --panel-padding: 0 0 4px !important;
+  --panel-padding: 0 0 2px !important;
 }
 
 /* Menu when right clicking links  */
