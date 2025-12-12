@@ -381,6 +381,16 @@ Order of Toolbars
   }
 }
 
+/* Fix purple background color when switching tabs in private 
+window for this specific moz preference. */
+:root {
+  &[privatebrowsingmode="temporary"] {
+    @media -moz-pref("browser.privatebrowsing.felt-privacy-v1") {
+        --tabpanel-background-color: var(--firefoxcss-main-bg-color) !important;
+    }
+  }
+}
+
 /* Avoids bright flash */
 #tabbrowser-tabpanels {
   background-color: var(
@@ -1034,6 +1044,13 @@ tab-group[collapsed] > .tabbrowser-tab {
 ============ W I N D O W   C O N T R O L   B U T T O N S ==============
 =====================================================================*/
 /* :root[sizemode="fullscreen"] #navigator-toolbox { position: relative; } */
+
+/* Fix for web apps */
+:root[taskbartab] #navigator-toolbox:not([tabs-hidden]) {
+	#nav-bar .titlebar-buttonbox-container {
+      display: none !important;
+	}
+}
 
 @media (-moz-platform: windows) {
   /* Keep showing the buttons when alt menu visible */
@@ -2181,8 +2198,14 @@ toolbar
   -moz-pref("browser.urlbar.scotchBonnet.enableOverride") {
   /* Disable searchmode switcher arrow */
   #urlbar[searchmode] #urlbar-searchmode-switcher,
-  #urlbar[searchmode] #searchmode-switcher-chicklet {
+  #urlbar[searchmode] .searchmode-switcher-chicklet {
     background-color: var(--firefoxcss-item-bg-color) !important;
+  }
+    
+    
+  #urlbar[searchmode] .searchmode-switcher-chicklet {
+    border-end-end-radius: var(--urlbar-icon-border-radius) !important;
+    border-start-end-radius: var(--urlbar-icon-border-radius) !important;
   }
 
   #urlbar:not([searchmode]) #urlbar-searchmode-switcher {
