@@ -10,9 +10,6 @@
 > Please go to https://github.com/datguypiko/Firefox-Mod-Blur for more information.
 
 <p align="center"> <img alt="FirefoxCss" src="https://i.imgur.com/ChlWHFp.png"> </p>
-<h6 align="center"> :wrench: Version 3.0 - Working on functionality overhaul. Responsive oneliner, toggling extra mods through about:config and other adjustments. </h6>
-
-<p align="center"><h6 align="center" href="https://github.com/datguypiko/Firefox-Mod-Blur/issues/129">Preview v 3.0 https://github.com/datguypiko/Firefox-Mod-Blur/issues/129</h6></p>
 
 <h2>:left_right_arrow: Organization Difference</h2>
 
