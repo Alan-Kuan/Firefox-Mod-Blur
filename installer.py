@@ -206,12 +206,6 @@ class Menu:
                 remove_file_or_dir(file_path)
             color_print(f"[-] '{mod}' was successfully uninstalled!", GREEN)
 
-            # show README if this mod requires manual operation, e.g., Centered bookmarks bar items
-            if self._config[category][mod] == [] and path.exists(readme_path):
-                color_print(f"Notes of '{mod}':", YELLOW)
-                with open(readme_path, encoding="utf8") as f:
-                    color_print(f.read().rstrip(), YELLOW)
-
             del self._config[category][mod]
 
         for mod in to_install:
@@ -219,17 +213,21 @@ class Menu:
             readme_path = path.join(mod_dir, "README.md")
             files = [entry for entry in os.listdir(mod_dir) if ".css" in entry]
 
-            for file in files:
-                shutil.copy(path.join(mod_dir, file), self._chrome_dir)
-            color_print(f"[+] '{mod}' was successfully installed!", GREEN)
+            if files == []:
+                color_print(f"[i] '{mod}' requires only manual configuration!", BLUE)
+            else:
+                for file in files:
+                    shutil.copy(path.join(mod_dir, file), self._chrome_dir)
+                color_print(f"[+] '{mod}' was successfully installed!", GREEN)
+
+                self._config[category][mod] = files
 
             # show README
             if path.exists(readme_path):
                 color_print(f"Notes of '{mod}':", YELLOW)
                 with open(readme_path, encoding="utf8") as f:
                     color_print(f.read().rstrip(), YELLOW)
-
-            self._config[category][mod] = files
+                print()
 
         print()
 
