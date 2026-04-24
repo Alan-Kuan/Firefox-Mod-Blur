@@ -1,4 +1,4 @@
-<h2 align="center"><a href="#wrench-installation"><img src="https://user-images.githubusercontent.com/61329159/204102654-0e414196-bea2-4147-9e1e-aeb8b4190893.png" width="20" height="20" /></a> Firefox Mod Blur - Modular (Installer Fork)</h2>
+<h2 align="center"><span><img src="https://user-images.githubusercontent.com/61329159/204102654-0e414196-bea2-4147-9e1e-aeb8b4190893.png" width="20" height="20" />Firefox Mod Blur - Modular (Installer Fork)</span></h2>
 
 <p align="center"><i>This fork adds an installer that helps manage mods/themes.</i></p>
 
