@@ -1,6 +1,7 @@
-Requires popout mod file popout_bookmarks_bar_on_hover.css installed.
+Enable:
+mod.transparent.bookmarks-bar 
+or 
+mod.transparent.bookmarks-bar.centered 
+in about:config. 
 
-If want left aligned delete code:
-
-  width:100vw;
-  align-self:center; 
+To access about:config type it in searchbar.
