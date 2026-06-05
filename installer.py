@@ -144,9 +144,6 @@ class Menu:
         while len(to_check) > 0:
             src_rel_path, dst_rel_path = to_check.pop()
 
-            if path.basename(src_rel_path) == "wallpaper":
-                continue
-
             src_file_path = path.join(dir, src_rel_path)
             dst_file_path = path.join(self._chrome_dir, dst_rel_path)
 
@@ -174,7 +171,7 @@ class Menu:
 
     def _handle_selection(self, category_dir, category, choices, single_choice=False):
         readme_path = path.join(category_dir, "README.md")
-        if path.exists(readme_path) and path.basename(category_dir) != "EXTRA THEMES":
+        if path.exists(readme_path):
             with open(readme_path, encoding="utf8") as f:
                 color_print(f.read(), YELLOW)
 
@@ -242,7 +239,6 @@ class Menu:
         if self._has_been_installed:
             choices = [
                 "Manage Mods",
-                "Manage Themes",
                 "Update",
                 "List",
                 "Uninstall",
@@ -262,8 +258,6 @@ class Menu:
                 keep = False
             elif sel == "Manage Mods":
                 self.mods()
-            elif sel == "Manage Themes":
-                self.themes()
             elif sel == "Update":
                 self.update()
             elif sel == "List":
@@ -302,11 +296,6 @@ class Menu:
         )
         if confirm_to_install:
             self.mods()
-        confirm_to_install = inquirer.confirm(
-            "Do you want to install any extra theme?", default=True
-        )
-        if confirm_to_install:
-            self.themes()
 
         color_print(
             "Remember to set `toolkit.legacyUserProfileCustomizations.stylesheets` to `True` in `about:config`!",
@@ -336,18 +325,6 @@ class Menu:
                 category_dir, category, mods, category in self._single_choice_categories
             )
 
-    def themes(self):
-        extra_theme_dir = path.join(self._base_dir, "EXTRA THEMES")
-        themes = sorted(
-            [
-                dir[0][len(extra_theme_dir) + 1 :]
-                for dir in os.walk(extra_theme_dir)
-                if dir[1] == []
-            ]
-        )
-
-        self._handle_selection(extra_theme_dir, "theme", themes, True)
-
     def update(self):
         something_is_changed = False
 
@@ -367,7 +344,7 @@ class Menu:
             print("[=] there is no update for essential files.")
 
         #
-        # Update mods/themes
+        # Update mods
         #
         # NOTE: turn it into a list to prevent modifying the dictionary during iteration
         categories = list(self._config.keys())
@@ -375,6 +352,7 @@ class Menu:
             if category == "essential":
                 continue
 
+            # LEGACY: `theme` category is removed, and the code here can be simplified in a future release
             category_dir = (
                 "EXTRA THEMES"
                 if category == "theme"
@@ -443,6 +421,7 @@ class Menu:
         print()
 
     def list(self):
+        # LEGACY: c != "theme" can be removed in a future release
         mod_categories = [
             c for c in self._config.keys() if c != "essential" and c != "theme"
         ]
@@ -455,13 +434,6 @@ class Menu:
                 for mod in self._config[category].keys():
                     bullet = f"{RED}>{RESET}"
                     print(f"  {bullet} {mod}")
-        print()
-
-        print("Installed Theme: ", end="")
-        if "theme" in self._config.keys():
-            color_print(list(self._config["theme"].keys())[0], GREEN)
-        else:
-            print("None")
         print()
 
     def uninstall(self):

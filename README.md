@@ -74,11 +74,9 @@ Examples:
   ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/328953d1-3ca4-4109-adef-fb8dc5e4250a)
 - Manage Mods:
   ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/e958649c-3c70-4961-b512-0b4bac854eef)
-- Manage Themes:
-  ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/46110517-57bc-4a4f-97c7-cf0c6f49f4c8)
-- Update Mods/Theme:
+- Update Mods:
   ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/c6e0e946-4a3b-475c-bb8c-9cd72e4d6372)
-- List Installed Mods/Theme:
+- List Installed Mods:
   ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/fea31d07-cbaa-4a46-8290-d5c58abbdd44)
 - Uninstall:
   ![image](https://github.com/Alan-Kuan/Firefox-Mod-Blur/assets/24734750/93183b15-bc1b-4ee9-b88c-29c8892abe41)
