@@ -68,6 +68,14 @@ def turn_into_backup(file_path):
     return backup_path
 
 
+def find_docs(p):
+    docs_path = []
+    for file in os.listdir(p):
+        if file.endswith(".md") or file.endswith(".txt"):
+            docs_path.append(path.join(p, file))
+    return docs_path
+
+
 class Config:
     def __init__(self, conf_path):
         self._conf_path = conf_path
@@ -170,9 +178,9 @@ class Menu:
         return to_add != [] or to_remove != [] or has_modified
 
     def _handle_selection(self, category_dir, category, choices, single_choice=False):
-        readme_path = path.join(category_dir, "README.md")
-        if path.exists(readme_path):
-            with open(readme_path, encoding="utf8") as f:
+        docs = find_docs(category_dir)
+        for doc in docs:
+            with open(doc, encoding="utf8") as f:
                 color_print(f.read(), YELLOW)
 
         default = None
@@ -195,9 +203,6 @@ class Menu:
         to_install = [mod for mod in sel if mod not in self._config[category].keys()]
 
         for mod in to_uninstall:
-            mod_dir = path.join(category_dir, mod)
-            readme_path = path.join(mod_dir, "README.md")
-
             for file in self._config[category][mod]:
                 file_path = path.join(self._chrome_dir, file)
                 remove_file_or_dir(file_path)
@@ -207,7 +212,7 @@ class Menu:
 
         for mod in to_install:
             mod_dir = path.join(category_dir, mod)
-            readme_path = path.join(mod_dir, "README.md")
+            docs = find_docs(mod_dir)
             files = [entry for entry in os.listdir(mod_dir) if ".css" in entry]
 
             if files == []:
@@ -219,10 +224,12 @@ class Menu:
 
                 self._config[category][mod] = files
 
-            # show README
-            if path.exists(readme_path):
+            # show content of text files or markdown files
+            if len(docs) > 0:
                 color_print(f"Notes of '{mod}':", YELLOW)
-                with open(readme_path, encoding="utf8") as f:
+            for doc in docs:
+                with open(doc, encoding="utf8") as f:
+                    color_print(f"[{path.basename(doc)}]:", YELLOW)
                     color_print(f.read().rstrip(), YELLOW)
                 print()
 
